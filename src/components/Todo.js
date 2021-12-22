@@ -9,18 +9,19 @@ const Todo = ({ taskText, todo, todos, setTodos }) => {
     //   } 
     // }
     // setTodos([...todos]);
-    todos = todos.map((item) => {
+    setTodos(todos.map((item) => {
       if (item.id === todo.id) {
-        item.completed = !todo.completed;
-        return item;
+        return {
+          ...item,
+          completed: !item.completed
+        };
       }
       return item;
-    });
-    setTodos([...todos]);
+    }));
   }
   return (
     <div className="todo">
-      <li className="todo-item">{taskText}</li>
+      <li className={`todo-item ${todo.completed ? "completed" : ""}`}>{taskText}</li>
       <button onClick={completeHandler} className="complete-btn">
         <i className="fas fa-check"></i>
       </button>
